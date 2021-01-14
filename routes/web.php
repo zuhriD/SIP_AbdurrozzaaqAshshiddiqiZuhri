@@ -14,5 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome',['title' => 'Zuhri Admin']);
 });
+
+Route::get('home', function(){
+	return view('home');
+});
+
+Route::get('user','UsersController@data');
+Route::get('user/add','UsersController@add');
+Route::post('user','UsersController@addProcess');
+Route::get('user/edit/{id}','UsersController@edit');
+Route::patch('user/{id}','UsersController@editProcess');
+Route::delete('user/{id}','UsersController@delete');
