@@ -50,6 +50,9 @@
                     <li>
                         <a href="{{ url('user') }}"> <i class="menu-icon fa fa-users"></i>Users </a>
                     </li>
+                    <li>
+                        <a href="{{ url('role') }}"> <i class="menu-icon fa fa-users"></i>Roles </a>
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
