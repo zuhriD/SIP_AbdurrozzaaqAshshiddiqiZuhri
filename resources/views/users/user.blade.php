@@ -40,9 +40,11 @@
 					<strong>Data Users</strong>
 				</div>
 				<div class="pull-right">
+					@if(session('role_id') == 1)
 					<a href="{{ url('user/add') }}" class="btn btn-success btn-sm">
 						<i class="fa fa-plus"></i>Add
 					</a>
+					@endif
 				</div>
 			</div>
 			<div class="card-body table-responsive">
@@ -55,7 +57,9 @@
 							<th>Email</th>
 							<th>Create At</th>
 							<th>Update At</th>
+							@if(session('role_id') == 1)
 							<th>Action</th>
+							@endif
 						</tr>
 					</thead>
 					<tbody>
@@ -66,7 +70,8 @@
 							<td>{{ $data->username }}</td>
 							<td>{{ $data->email }}</td>
 							<td>{{ $data->created_at }}</td>
-							<td>{{ $data->update_at }}</td>
+							<td>{{ $data->updated_at }}</td>
+							@if(session('role_id') == 1)
 							<td class="text-center">
 								<a href="{{ url('user/edit/' .$data->id) }}" class="btn btn-primary btn-sm">
 									<i class="fa fa-pencil"></i>
@@ -79,6 +84,7 @@
 									</button>
 								</form>
 							</td>
+							@endif
 						</tr>
 						@endforeach
 					</tbody>

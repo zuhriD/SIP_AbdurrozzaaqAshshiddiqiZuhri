@@ -15,13 +15,10 @@ class RolesSeeder extends Seeder
          \DB::table('roles')->insert([
         	[
             'name' => 'admin',
-            'created_at' => date("Y-m-d"),
-            'update_at' => date("Y-m-d")
+            
     	    ],
     	    [
             'name' => 'user',
-            'created_at' => date("Y-m-d"),
-            'update_at' => date("Y-m-d")
     	    ]
     ]);
     }

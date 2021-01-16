@@ -62,7 +62,7 @@
 							<td>{{ $loop->iteration}}</td>
 							<td>{{ $data->name }}</td>
 							<td>{{ $data->created_at }}</td>
-							<td>{{ $data->update_at }}</td>
+							<td>{{ $data->updated_at }}</td>
 							<td class="text-center">
 								<a href="{{ url('role/edit/' .$data->id) }}" class="btn btn-primary btn-sm">
 									<i class="fa fa-pencil"></i>

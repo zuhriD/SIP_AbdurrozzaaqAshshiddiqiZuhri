@@ -13,24 +13,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome',['title' => 'Zuhri Admin']);
-});
 
+
+
+Route::get('/','AuthController@login');
+Route::post('login','AuthController@loginProcess');
+Route::get('register','AuthController@register');
+Route::post('register/proses','AuthController@registerProcess');
+Route::group(['middleware'=>['CekLoginMiddleware','CekRoleMiddleware:1']], function(){
 Route::get('home', function(){
-	return view('home');
+	return view('home',['title' => 'Zuhri Admin']);
 });
 
+Route::get('logout','AuthController@logout');
+//user
 Route::get('user','UsersController@data');
 Route::get('user/add','UsersController@add');
 Route::post('user','UsersController@addProcess');
 Route::get('user/edit/{id}','UsersController@edit');
 Route::patch('user/{id}','UsersController@editProcess');
 Route::delete('user/{id}','UsersController@delete');
-
+//role
 Route::get('role','RolesController@data');
 Route::get('role/add','RolesController@add');
 Route::post('role','RolesController@addProcess');
 Route::get('role/edit/{id}','RolesController@edit');
 Route::patch('role/{id}','RolesController@editProcess');
 Route::delete('role/{id}','RolesController@delete');
+
+});
+Route::group(['middleware'=>['CekLoginMiddleware','CekRoleMiddleware:1,2']], function(){
+Route::get('home', function(){
+	return view('home',['title' => 'Zuhri Admin']);
+});
+Route::get('user','UsersController@data');
+Route::get('role','RolesController@data');
+});

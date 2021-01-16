@@ -26,8 +26,6 @@ class UsersController extends Controller
 			'username' => $request->username,
 			'email' => $request->email,
 			'password' => $request->password,
-			'created_at' => date('Y-m-d H:i:s'),
-			'update_at' => date('Y-m-d H:i:s')
 
 		]);
 		return redirect('user')->with('status', 'User Berhasil ditambah');
@@ -48,8 +46,6 @@ class UsersController extends Controller
 			'username' => $request->username,
 			'email' => $request->email,
 			'password' => $request->password,
-			'created_at' => date('Y-m-d H:i:s'),
-			'update_at' => date('Y-m-d H:i:s')
 		]);	
 		return redirect('user')->with('status', 'User Berhasil diedit');
 	}
