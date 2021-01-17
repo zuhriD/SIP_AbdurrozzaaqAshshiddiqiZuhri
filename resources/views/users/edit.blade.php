@@ -42,7 +42,10 @@
 			</div>
 			<div class="card-body">
 				<div class="row">
-					<div class="col-md-4 offset-md-4">
+					<div class="col col-md-4">
+						<img class="rounded-circle mx-auto d-block" style="max-width: 60%;" src="{{asset('images/default.png')}}" alt="Card image cap">
+					</div>
+					<div class="col-md-4 ">
 						<form action="{{ url('user/' .$user->id) }}" method="post">
 							@method('patch')
 							@csrf

@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\Profile;
 
 class UsersController extends Controller
 {
 	public function data()
 	{
-		$users = DB::table('users')->get();
+		$users = DB::table('users')->paginate(5);
 		return view('users.user', compact('users'));
 	}
 
@@ -25,7 +28,8 @@ class UsersController extends Controller
 			'name' => $request->name,
 			'username' => $request->username,
 			'email' => $request->email,
-			'password' => $request->password,
+			'remember_token' => Str::random(10),
+			'password' => Hash::make($request->password),
 
 		]);
 		return redirect('user')->with('status', 'User Berhasil ditambah');
@@ -45,7 +49,8 @@ class UsersController extends Controller
 			'name' => $request->name,
 			'username' => $request->username,
 			'email' => $request->email,
-			'password' => $request->password,
+			'remember_token' =>  Str::random(10),
+			'password' => Hash::make($request->password),
 		]);	
 		return redirect('user')->with('status', 'User Berhasil diedit');
 	}
@@ -55,4 +60,9 @@ class UsersController extends Controller
 		DB::table('users')->where('id', $id)->delete();
 		return redirect('user')->with('status', 'User Berhasil dihapus');
 	}
+	    public function editView()
+    {
+    	$user = DB::table('profil_user')->where('user_id', session('id'))->first();
+        return view('users.editProfil', compact('user'));
+    }
 }

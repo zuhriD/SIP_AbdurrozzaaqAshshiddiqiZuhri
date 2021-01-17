@@ -42,8 +42,11 @@
 				<div class="pull-right">
 					@if(session('role_id') == 1)
 					<a href="{{ url('user/add') }}" class="btn btn-success btn-sm">
-						<i class="fa fa-plus"></i>Add
+						<i class="fa fa-plus"></i> Add
 					</a>
+					<button type="button" class="btn btn-danger btn-sm" id="deleteAllSelectedR">
+						<i class="fa fa-minus-square"></i> Delete Selected
+					</button>
 					@endif
 				</div>
 			</div>
@@ -59,13 +62,14 @@
 							<th>Update At</th>
 							@if(session('role_id') == 1)
 							<th>Action</th>
+							<th><input type="checkbox" id="checkBoxAll"></th>
 							@endif
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($users as $data)
-						<tr>
-							<td>{{ $loop->iteration}}</td>
+						@foreach ($users as $no => $data)
+						<tr id="sid{{$data->id}}">
+							<td>{{ $users->firstItem()+$no}}</td>
 							<td>{{ $data->name }}</td>
 							<td>{{ $data->username }}</td>
 							<td>{{ $data->email }}</td>
@@ -73,6 +77,9 @@
 							<td>{{ $data->updated_at }}</td>
 							@if(session('role_id') == 1)
 							<td class="text-center">
+								<a href="{{ url('profil/' .$data->id) }}" class="btn btn-warning btn-sm">
+									<i class="fa fa-eye"></i>
+								</a>
 								<a href="{{ url('user/edit/' .$data->id) }}" class="btn btn-primary btn-sm">
 									<i class="fa fa-pencil"></i>
 								</a>
@@ -83,12 +90,15 @@
 										<i class="fa fa-trash"></i>
 									</button>
 								</form>
+								
 							</td>
+							<td><input type="checkbox" name="ids" class="checkBoxClass" value="{{$data->id}}"></td>
 							@endif
 						</tr>
 						@endforeach
 					</tbody>
 				</table>
+				{{$users->links()}}
 			</div>
 
 		</div>

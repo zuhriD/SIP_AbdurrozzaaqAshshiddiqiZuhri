@@ -29,7 +29,7 @@
 
 </head>
 <body>
-        <!-- Left Panel -->
+    <!-- Left Panel -->
 
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -55,6 +55,9 @@
                         <a href="{{ url('role') }}"> <i class="menu-icon fa fa-users"></i>Roles </a>
                     </li>
                     @endif
+                    <li>
+                        <a href="{{ url('profil/'.session('id')) }}"> <i class="menu-icon fa fa-user"></i>Profile </a>
+                    </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -82,7 +85,7 @@
                             </form>
                         </div>
 
-                       
+
                     </div>
                 </div>
 
@@ -92,9 +95,9 @@
                             <img class="user-avatar rounded-circle" src="{{asset('style/images/admin.jpg')}}" alt="User Avatar">
                         </a>
                         <div class="user-menu dropdown-menu">
-                                <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
 
-                                <a class="nav-link" href="{{ url('logout') }}"><i class="fa fa-power -off"></i>Logout</a>
+                            <a class="nav-link" href="{{ url('logout') }}"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
                         <span>{{ session('nama') }}</span>
                     </div>
@@ -117,12 +120,70 @@
 
     <!-- Right Panel -->
 
-
-    <script src="{{asset('style/assets/js/vendor/jquery-2.1.4.min.js')}}"></script>
     <script src="{{asset('style/assets/js/popper.min.js')}}"></script>
     <script src="{{asset('style/assets/js/plugins.js')}}"></script>
     <script src="{{asset('style/assets/js/main.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+       $(document).ready(function() {
+         $("#checkBoxAll").click(function() {
+          $(".checkBoxClass").prop('checked', $(this).prop('checked')); 
+      }); 
 
+         $(document).on('click','#deleteAllSelectedR',function() {
+             var id = [];
+             if(confirm("Are You sure to delete this data?")){
+                 $('.checkBoxClass:checked').each(function () {
+                    id.push($(this).val());     
+                });
+                 if (id.length > 0) {
+                     $.ajax({
+                    url:'{{ url('profil/dell') }}',
+                    type:'DELETE',
+                    data:{
+                        ids:id,
+                        _token:$("input[name=_token]").val()
+                    },
+                    success:function (response) {
+                        $.each(id,function(key,val){
+                            $('#sid'+val).remove();
+                        });
+                    }
+                });
+                
+                 }else{
+                    alert("Please select atleast one checkbox");  
+                 }
+             }
 
+         });
+           // $("#deleteAllSelectedR").click(function(e){
+           //      e.preventDefault();
+           //      var allids = [];
+           //      $("input:checkbox[name=ids]:checked").each(function(){
+           //          allids.push($(this).val());
+           //      });
+
+           //      $.ajax({
+           //          url:'{{ url('profil/dell') }}',
+           //          type:'DELETE',
+           //          data:{
+           //              ids:allids,
+           //              _token:$("input[name=_token]").val()
+           //          },
+           //          success:function (response) {
+           //              $.each(allids,function(key,val){
+           //                  $('#sid'+val).remove();
+           //              });
+           //          }
+           //      });
+           // });
+       });
+       $('.datepicker').datepicker({
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
+    });
+
+</script>
 </body>
 </html>

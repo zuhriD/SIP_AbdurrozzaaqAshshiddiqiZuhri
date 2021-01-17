@@ -47,5 +47,10 @@ Route::get('home', function(){
 	return view('home',['title' => 'Zuhri Admin']);
 });
 Route::get('user','UsersController@data');
+Route::get('profil/{id}','ProfileController@index');
+Route::post('profil/create','ProfileController@create');
+Route::delete('profil/dell','ProfileController@deleteAllSelected');
+Route::patch('profil/edit/{id}','ProfileController@edit');
+Route::get('user/editView','UsersController@editView');
 Route::get('role','RolesController@data');
 });

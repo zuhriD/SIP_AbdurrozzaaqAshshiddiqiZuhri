@@ -25,6 +25,7 @@ class AuthController extends Controller
     		if (Hash::check($request->password,$user->password)) {
     			session(['berhasil_login'=> true,
     					 'nama'=>$user->name,
+                         'id' =>$user->id,
     					 'role_id'=> $user->role_id
     					]);
     			return redirect('home');
