@@ -38,8 +38,8 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="./"><img src="{{asset('style/images/logo.png')}}" alt="Logo"></a>
-                <a class="navbar-brand hidden" href="./"><img src="{{asset('style/images/logo2.png')}}" alt="Logo"></a>
+                <a class="navbar-brand" href="./"><h3>Zuhri Admin</h3></a>
+                <a class="navbar-brand hidden" href="./">Z</a>
             </div>
 
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -91,15 +91,16 @@
 
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
+                        <label style="margin-right: 10px;
+                        margin-top: 5px;">{{ session('nama') }}</label>    
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="{{asset('style/images/admin.jpg')}}" alt="User Avatar">
+                            <i class="  fa fa-angle-double-down"></i>
                         </a>
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
 
                             <a class="nav-link" href="{{ url('logout') }}"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
-                        <span>{{ session('nama') }}</span>
+                       
                     </div>
                 </div>
             </div>
@@ -119,25 +120,33 @@
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
-
+    <script src="{{asset('style/assets/js/vendor/jquery-2.1.4.min.js')}}"></script>
     <script src="{{asset('style/assets/js/popper.min.js')}}"></script>
     <script src="{{asset('style/assets/js/plugins.js')}}"></script>
     <script src="{{asset('style/assets/js/main.js')}}"></script>
+     <script src="{{asset('style/assets/js/lib/chart-js/Chart.bundle.js')}}"></script>
+    <script src="{{asset('style/assets/js/dashboard.js')}}"></script>
+    <script src="{{asset('style/assets/js/widgets.js')}}"></script>
+
+    <script src="{{asset('style/assets/js/lib/vector-map/jquery.vmap.js')}}"></script>
+    <script src="{{asset('style/assets/js/lib/vector-map/jquery.vmap.min.js')}}"></script>
+    <script src="{{asset('style/assets/js/lib/vector-map/jquery.vmap.sampledata.js')}}"></script>
+    <script src="{{asset('style/assets/js/lib/vector-map/country/jquery.vmap.world.js')}}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
-       $(document).ready(function() {
-         $("#checkBoxAll").click(function() {
+     $(document).ready(function() {
+       $("#checkBoxAll").click(function() {
           $(".checkBoxClass").prop('checked', $(this).prop('checked')); 
       }); 
 
-         $(document).on('click','#deleteAllSelectedR',function() {
-             var id = [];
-             if(confirm("Are You sure to delete this data?")){
-                 $('.checkBoxClass:checked').each(function () {
-                    id.push($(this).val());     
-                });
-                 if (id.length > 0) {
-                     $.ajax({
+       $(document).on('click','#deleteAllSelectedR',function() {
+           var id = [];
+           if(confirm("Are You sure to delete this data?")){
+               $('.checkBoxClass:checked').each(function () {
+                id.push($(this).val());     
+            });
+               if (id.length > 0) {
+                   $.ajax({
                     url:'{{ url('profil/dell') }}',
                     type:'DELETE',
                     data:{
@@ -150,13 +159,13 @@
                         });
                     }
                 });
-                
-                 }else{
-                    alert("Please select atleast one checkbox");  
-                 }
-             }
 
-         });
+               }else{
+                alert("Please select atleast one checkbox");  
+            }
+        }
+
+    });
            // $("#deleteAllSelectedR").click(function(e){
            //      e.preventDefault();
            //      var allids = [];
@@ -179,11 +188,12 @@
            //      });
            // });
        });
-       $('.datepicker').datepicker({
+     $('.datepicker').datepicker({
         format: 'mm/dd/yyyy',
         startDate: '-3d'
     });
 
 </script>
+
 </body>
 </html>

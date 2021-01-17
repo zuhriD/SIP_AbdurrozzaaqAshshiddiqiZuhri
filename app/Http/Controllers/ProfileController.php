@@ -81,19 +81,7 @@ class ProfileController extends Controller
             $dt->foto_profil = $request->file('gambar')->getClientOriginalName();
             $dt->save();
         }
-        // $nm = $request->gambar;
-        // $namaFile = $nm->getClientOriginalName();
-        // $dt_upload = new Profile;
-        // $dt_upload->user_id = session('id');
-        // $dt_upload->nama_lengkap = $request->name;
-        // $dt_upload->gender = $request->gender;
-        // $dt_upload->tgl_lahir = $request->tgl_lahir;
-        // $dt_upload->alamat = $request->alamat;
-        // $dt_upload->portofolio = $request->portofolio;
-        //  $dt_upload->pekerjaan = $request->pekerjaan;
-        // $dt_upload->foto_profil = $namaFile;
-        // $nm->move(public_path().'/images',$namaFile);
-        // $dt_upload->save();
+      
     
         return redirect('profil/'.session('id'))->with('status', 'User Berhasil ditambah');
     }

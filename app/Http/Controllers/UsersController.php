@@ -22,7 +22,8 @@ class UsersController extends Controller
 	}
 
 	public function addProcess(Request $request)
-	{
+	{	
+		
 		DB::table('users')->insert([
 			'role_id' => 2, 
 			'name' => $request->name,
@@ -50,7 +51,7 @@ class UsersController extends Controller
 			'username' => $request->username,
 			'email' => $request->email,
 			'remember_token' =>  Str::random(10),
-			'password' => Hash::make($request->password),
+			'password' => Hash::make($request->password)
 		]);	
 		return redirect('user')->with('status', 'User Berhasil diedit');
 	}

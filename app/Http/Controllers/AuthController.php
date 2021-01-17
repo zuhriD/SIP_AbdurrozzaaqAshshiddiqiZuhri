@@ -23,11 +23,14 @@ class AuthController extends Controller
     	$user = DB::table('users')->where('username', $request->username)->first();
     	if ($user) {
     		if (Hash::check($request->password,$user->password)) {
+                 $jml=DB::table('users')->get()->count();
     			session(['berhasil_login'=> true,
     					 'nama'=>$user->name,
                          'id' =>$user->id,
-    					 'role_id'=> $user->role_id
+    					 'role_id'=> $user->role_id,
+                         'jml'=>$jml
     					]);
+               
     			return redirect('home');
     		}
     	}

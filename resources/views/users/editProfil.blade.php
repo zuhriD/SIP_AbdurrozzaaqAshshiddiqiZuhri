@@ -51,7 +51,8 @@
 								<div class="form-check">
 									<div class="radio">
 										<label for="radio1" class="form-check-label ">
-											<input type="radio" id="radio1" name="gender" value="Laki-laki" class="form-check-input">Laki-laki
+											@if ($user->gender == "Laki-laki")
+												<input type="radio" id="radio1" name="gender" value="Laki-laki" class="form-check-input" checked>Laki-laki
 										</label>
 									</div>
 									<div class="radio">
@@ -59,6 +60,18 @@
 											<input type="radio" id="radio2" name="gender" value="Perempuan" class="form-check-input">Perempuan
 										</label>
 									</div>
+									@else
+									<div class="radio">
+										<label for="radio1" class="form-check-label ">
+												<input type="radio" id="radio1" name="gender" value="Laki-laki" class="form-check-input" >Laki-laki
+										</label>
+									</div>
+									<div class="radio">
+										<label for="radio2" class="form-check-label ">
+											<input type="radio" id="radio2" name="gender" value="Perempuan" class="form-check-input" checked>Perempuan
+										</label>
+									</div>
+									@endif
 								</div>
 							</div>
 							<div class="form-group">
