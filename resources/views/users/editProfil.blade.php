@@ -34,14 +34,23 @@
 				<div class="pull-left">
 					<strong>Edit User</strong>
 				</div>
+				<div class="pull-right">
+					<a href="{{ url('home') }}" class="btn btn-secondary btn-sm">
+						<i class="fa fa-undo"></i> Back
+					</a>
+				</div>
 			</div>
 			<div class="card-body">
 				@if ($user != null)
-					<div class="row">
-					<div class="col-md-8 offset-md-2">
+				<div class="row">
+					<div class="col col-md-4">
 						<form action="{{ url('profil/edit/'.$user->id) }}" method="post" enctype="multipart/form-data">
 							@method('patch')
 							@csrf
+							<img class="rounded-circle mx-auto d-block" style="max-width: 60%;" src="{{asset('images/'.$user->foto_profil)}}" alt="Card image cap" id="blah">
+							<input type="file" id="imgInp" name="gambar" class="form-control-file" style="margin-left: 80px;margin-top: 10px;">
+						</div>
+						<div class="col-md-5">
 							<div class="form-group">
 								<label>Nama Lengkap</label>
 								<input type="text" name="name" class="form-control" value="{{session('nama')}}" autofocus required>
@@ -52,7 +61,7 @@
 									<div class="radio">
 										<label for="radio1" class="form-check-label ">
 											@if ($user->gender == "Laki-laki")
-												<input type="radio" id="radio1" name="gender" value="Laki-laki" class="form-check-input" checked>Laki-laki
+											<input type="radio" id="radio1" name="gender" value="Laki-laki" class="form-check-input" checked>Laki-laki
 										</label>
 									</div>
 									<div class="radio">
@@ -63,7 +72,7 @@
 									@else
 									<div class="radio">
 										<label for="radio1" class="form-check-label ">
-												<input type="radio" id="radio1" name="gender" value="Laki-laki" class="form-check-input" >Laki-laki
+											<input type="radio" id="radio1" name="gender" value="Laki-laki" class="form-check-input" >Laki-laki
 										</label>
 									</div>
 									<div class="radio">
@@ -89,10 +98,6 @@
 							<div class="form-group">
 								<label>Pekerjaan</label>
 								<input type="text" name="pekerjaan" class="form-control" value="{{$user->pekerjaan}}" autofocus required>
-							</div>
-							<div class="form-group">
-								<label>Foto Profil</label>
-								<input type="file" id="file-input" name="gambar" value="{{$user->foto_profil}}" class="form-control-file">
 							</div>
 							<button type="submit" class="btn btn-success">Save</button>
 						</form>

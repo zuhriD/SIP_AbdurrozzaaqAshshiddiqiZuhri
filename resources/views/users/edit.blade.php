@@ -43,7 +43,13 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col col-md-4">
-						<img class="rounded-circle mx-auto d-block" style="max-width: 60%;" src="{{asset('images/default.png')}}" alt="Card image cap">
+						<form method="post" action="{{ url('profil/editGambar/'.$profil->id) }}" enctype="multipart/form-data">
+							@method('patch')
+							@csrf
+							<img class="rounded-circle mx-auto d-block" style="max-width: 60%;" src="{{asset('images/'.$profil->foto_profil)}}" alt="Card image cap" id="blah">
+							<input type="file" id="imgInp" name="gambar" class="form-control-file" style="margin-left: 80px;margin-top: 10px;">
+							<button class="btn btn-primary" style="margin-left: 80px;margin-top: 10px;"><i class="fa fa-pencil"></i> Ubah</button>
+						</form>
 					</div>
 					<div class="col-md-4 ">
 						<form action="{{ url('user/' .$user->id) }}" method="post">

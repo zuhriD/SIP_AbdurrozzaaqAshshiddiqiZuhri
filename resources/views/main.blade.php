@@ -55,9 +55,7 @@
                         <a href="{{ url('role') }}"> <i class="menu-icon fa fa-users"></i>Roles </a>
                     </li>
                     @endif
-                    <li>
-                        <a href="{{ url('profil/'.session('id')) }}"> <i class="menu-icon fa fa-user"></i>Profile </a>
-                    </li>
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -100,7 +98,7 @@
 
                             <a class="nav-link" href="{{ url('logout') }}"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -124,7 +122,7 @@
     <script src="{{asset('style/assets/js/popper.min.js')}}"></script>
     <script src="{{asset('style/assets/js/plugins.js')}}"></script>
     <script src="{{asset('style/assets/js/main.js')}}"></script>
-     <script src="{{asset('style/assets/js/lib/chart-js/Chart.bundle.js')}}"></script>
+    <script src="{{asset('style/assets/js/lib/chart-js/Chart.bundle.js')}}"></script>
     <script src="{{asset('style/assets/js/dashboard.js')}}"></script>
     <script src="{{asset('style/assets/js/widgets.js')}}"></script>
 
@@ -166,32 +164,26 @@
         }
 
     });
-           // $("#deleteAllSelectedR").click(function(e){
-           //      e.preventDefault();
-           //      var allids = [];
-           //      $("input:checkbox[name=ids]:checked").each(function(){
-           //          allids.push($(this).val());
-           //      });
+   });
+     function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
 
-           //      $.ajax({
-           //          url:'{{ url('profil/dell') }}',
-           //          type:'DELETE',
-           //          data:{
-           //              ids:allids,
-           //              _token:$("input[name=_token]").val()
-           //          },
-           //          success:function (response) {
-           //              $.each(allids,function(key,val){
-           //                  $('#sid'+val).remove();
-           //              });
-           //          }
-           //      });
-           // });
-       });
-     $('.datepicker').datepicker({
-        format: 'mm/dd/yyyy',
-        startDate: '-3d'
-    });
+        reader.onload = function(e) {
+          $('#blah').attr('src', e.target.result);
+      }
+
+    reader.readAsDataURL(input.files[0]); // convert to base64 string
+}
+}
+    
+$("#imgInp").change(function() {
+  readURL(this);
+});
+$('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});
 
 </script>
 

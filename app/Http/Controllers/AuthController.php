@@ -31,7 +31,8 @@ class AuthController extends Controller
                          'jml'=>$jml
     					]);
                
-    			return redirect('home');
+    			 $prof = DB::table('profil_user')->where('user_id', $user->id)->first();
+              return view('home', compact('prof'));
     		}
     	}
     	return redirect('/')->with('pesan','Username Atau Password Salah');

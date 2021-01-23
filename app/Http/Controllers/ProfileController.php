@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Profile;
 use App\User;
-
+use App\Imports\ProfilesImport;
+use Maatwebsite\Excel\Facades\Excel;
 class ProfileController extends Controller
 {
     /**
@@ -122,5 +123,37 @@ class ProfileController extends Controller
 
         // }
         return response()->json(['success'=>"Student have deleted"]); 
+    }
+    public function editGambar(Request $request,$id)
+    {
+        $user= User::where('id',$id)->first();
+        $dt = Profile::find($id);
+        $dt->update($request->all());
+        if ($request->hasFile('gambar')) {
+            $request->file('gambar')->move('images/',$request->file('gambar')->getClientOriginalName());
+            $dt->foto_profil = $request->file('gambar')->getClientOriginalName();
+            $dt->save();
+        }
+      
+    
+        return redirect('user')->with('status', 'Gambar Berhasil diedit');
+    }
+    public function data()
+    {
+         $prof = DB::table('profil_user')->where('user_id', session('id'))->first();
+        return view('home', compact('prof'));
+    }
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $post= User::where('name','like','%'.$search.'%')->paginate(5);
+        session(['d'=>$post]);
+        return view('users.user',['users'=>$post]);
+    }
+    public function import(Request $request)
+    {
+        $file = $request->file('import');
+        Excel::import(new ProfilesImport, $file);
+        return redirect('home')->withStatus('Excel file imported succesfully');
     }
 }
